@@ -1,0 +1,11 @@
+.action-button{
+    background: #208f8f;
+    border-radius: 20px;
+    padding: 0.5rem;
+    color:#fff;
+    border: none;
+}
+
+body{
+    background-image: url("/static/img/mountain_bg.jpg");
+}

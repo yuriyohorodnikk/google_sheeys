@@ -1,0 +1,38 @@
+{% load static %}
+{% load socialaccount %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    {% block link_modules %}{% endblock %}
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-dark" style="font-family: 'Roboto Condensed', sans-serif;">
+        <div class="container">
+            <a class="navbar-brand" href="http://nuwm.edu.ua">NUWEE</a>
+            <button class="navbar-toggler" data-toggle="collapse" data-target="navbarNav"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav text-light mt-3 ml-auto">
+                    <li class="nav-item"><a href="http://localhost:8000/" class="nav-link">Home</a></li>
+                    <li class="nav-item mr-5"><a href="http://localhost:8000/" class="nav-link">About</a></li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item"><a href="{% url 'super_logout' %}" class="nav-link">Log out</a></li>
+                    <li class="nav-item"><p class="nav-link">{{user.first_name}} {{user.last_name}}</p></li>
+                    {% else %}
+                    <a class="btn btn-light action-button text-light px-3" role="button" href="{% provider_login_url "google" %}">Sign in</a>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    {% block body %}
+    {% endblock %}
+</body>
+</html>

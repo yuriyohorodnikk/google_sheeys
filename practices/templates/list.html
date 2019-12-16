@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}List of practices{% endblock %}
+
+{% block link_modules %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/table.css' %}">
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="container-table100">
+        <div class="wrap-table100">
+            <div class="table100 ver1 align-items-center">
+                <h1 class="display-4 text-white h1_title">{{title}}</h1>
+                <table data-vertable="ver1">
+                    <thead>
+                        <tr class="row100 head">
+                            {% for head in headings %}
+                                <th class="column100" data-column="column1">{{ head }}</th>
+                            {% endfor %}
+                            <th class="column100" data-column="column1">Підписка</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in items %}
+                        <tr class="row100">
+                            {% for i in item %}
+                            <td class="column100 column1" data-column="column1">{{i}}</td>
+                            {% endfor %}
+                            <td class="column100 column1" data-column="column1">
+                                {% if user.is_authenticated %}
+                                <button class="btn btn-light action-button text-light px-3" role="button"><a href="{% url 'super_sheet' item.0 %}" style="color: #ffffff; text-decoration: none;">Підписатися</a></button>
+                                {% else %}
+                                <p style="color: green;">You need to <strong>sign in</strong></p>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
